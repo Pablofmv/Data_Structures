@@ -29,6 +29,22 @@ class LinkedList():
         else:
             self.tail.next = new_node
             self.tail = new_node
+    
+    def popBack(self):
+
+        if self.head is None:
+            raise Exception("Empty List")
+        
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            p = self.head
+            while p.next.next is not None:
+                p = p.next
+            p.next = None
+            self.tail = p
+            
 
     def printList(self):
 
@@ -43,4 +59,6 @@ if __name__ == "__main__":
     ll.pushFront(2)
     ll.pushFront(1)
     ll.pushBack(3)
+    ll.printList()
+    ll.popBack()
     ll.printList()
