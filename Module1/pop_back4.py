@@ -4,13 +4,13 @@ class Node:
         self.key = key
         self.next = None
 
-class LinkedList():
+class LinkedList:
 
     def __init__(self):
         self.head = None
         self.tail = None
     
-    def pushFront(self,key):
+    def pushFront(self, key):
 
         new_node = Node(key)
         new_node.next = self.head
@@ -19,7 +19,7 @@ class LinkedList():
         if new_node.next is None:
             self.tail = new_node
     
-    def pushBack(self,key):
+    def pushBack(self, key):
 
         new_node = Node(key)
 
@@ -44,9 +44,9 @@ class LinkedList():
                 p = p.next
             p.next = None
             self.tail = p
-            
-
+    
     def printList(self):
+
         current = self.head
         while current:
             print(current.key, end = "->")
