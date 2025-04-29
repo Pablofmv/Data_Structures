@@ -16,9 +16,9 @@ class LinkedList:
         new_node.next = self.head
         self.head = new_node
 
-        if self.tail is None:
+        if new_node.next is None:
             self.tail = new_node
-        
+    
     def pushBack(self, key):
 
         new_node = Node(key)
@@ -72,4 +72,3 @@ if __name__ == "__main__":
     ll.printList()
     ll.popFront()
     ll.printList()
-
