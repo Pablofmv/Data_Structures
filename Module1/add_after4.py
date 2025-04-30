@@ -55,9 +55,26 @@ class LinkedList:
         if self.head is None:
             self.tail = None
     
+    def AddAfter(self,node,key):
+
+        new_node = Node(key)
+        new_node.next = node.next
+        node.next = new_node
+
+        if self.tail == node:
+            self.tail = new_node
+
+    
     def AddAfterKey(self, target_key, new_key):
 
         current = self.head
+        while current and current.key != target_key:
+            current = current.next
+        
+        if current:
+            self.AddAfter(current, new_key)
+        else:
+            print("The node with key {target_key} does not exist.")
     
     def printList(self):
         current = self.head
@@ -76,3 +93,6 @@ if __name__ == "__main__":
     ll.popFront()
     ll.printList()
     ll.popBack()
+    ll.printList()
+    ll.AddAfterKey(2,4)
+    ll.printList()
