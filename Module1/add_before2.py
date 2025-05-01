@@ -55,6 +55,46 @@ class LinkedList:
         if self.head is None:
             self.tail = None
     
+    def AddAfter(self, node, key):
+
+        new_node = Node(key)
+        new_node.next = node.next
+        node.next = new_node
+
+        if self.tail == node:
+            self.tail = new_node
+
+    def AddAfterKey(self, target_key, new_key):
+
+        current = self.head
+        while current and current.key != target_key:
+            current = current.next
+        
+        if current:
+            self.AddAfter(current, new_key)
+        else:
+            print(f"Node with {target_key} not found.")
+    
+    def AddBeforeKey(self, target_key, new_key):
+
+        if self.head is None:
+            raise Exception("Empty List.")
+        
+        if self.head.key == target_key:
+            self.pushFront(new_key)
+            return
+        
+        current = self.head
+        while current and current.next.key != target_key:
+            current = current.next
+        
+        if current.next:
+            new_node = Node(new_key)
+            new_node.next = current.next
+            current.next = new_node
+        else:
+            print(f"Node with key {target_key} not found.")
+    
     def printList(self):
 
         current = self.head
@@ -72,4 +112,8 @@ if __name__ == "__main__":
     ll.popBack()
     ll.printList()
     ll.popFront()
+    ll.printList()
+    ll.AddAfterKey(2,4)
+    ll.printList()
+    ll.AddBeforeKey(2,1)    
     ll.printList()
