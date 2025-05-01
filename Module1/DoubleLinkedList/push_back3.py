@@ -1,5 +1,5 @@
 class Node:
-    
+
     def __init__(self, key):
         self.key = key
         self.prev = None
@@ -24,6 +24,7 @@ class DoublyLinkedList:
             self.tail = new_node
     
     def printList(self):
+
         current = self.head
         while current:
             print(current.key, end = "->")
