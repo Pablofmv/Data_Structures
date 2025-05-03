@@ -61,6 +61,26 @@ class DoublyLinkedList:
         else:
             print("Node with key {target_key} not found.")
     
+    def AddBefore(self, node, key):
+
+        new_node = Node(key)
+        new_node.next = node.next
+    
+    def AddBeforeKey(self, target_key, new_key):
+
+        if self.head is None:
+            print("Empty List.")
+            return
+
+        current = self.head
+        while current and current.key != target_key:
+            current = current.next
+        
+        if current:
+            self.AddBefore(current, new_key)
+        else:
+            print(f"Node with key {target_key} is not found.")
+    
     def printList(self):
 
         current = self.head
