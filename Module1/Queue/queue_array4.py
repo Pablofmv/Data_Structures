@@ -37,7 +37,7 @@ class CirlceQueue:
         return self.size == self.capacity
     
     def __str__(self):
-        return str()
+        return str(self.queue)
     
 if __name__ == "__main__":
     q = CirlceQueue(5)
@@ -46,6 +46,11 @@ if __name__ == "__main__":
     q.enqueue(3)
     q.enqueue(4)
     q.enqueue(5)
+    print(q)
+    q.dequeue()
+    print(q)
+    q.enqueue(6)
+    print(q)
 
 
 
