@@ -59,3 +59,5 @@ if __name__ == "__main__":
     q.enqueue(2)
     q.enqueue(3)
     q.printQueue()
+    q.dequeue()
+    q.printQueue()
