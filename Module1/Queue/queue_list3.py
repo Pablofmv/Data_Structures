@@ -25,18 +25,17 @@ class Queue:
 
     def dequeue(self):
 
-        if self.head is None:
+        if self.is_empty():
             print("Empty List.")
             return None
-        
-        item = self.head.key
-        
-        self.head = self.head.next
 
+        item = self.head.key
+
+        self.head = self.head.next
 
         if self.head is None:
             self.tail = None
-        
+
         self.size -= 1
 
         return item
@@ -44,19 +43,21 @@ class Queue:
     def is_empty(self):
         return self.size == 0
     
-    def printQueue(self):
+    def printList(self):
+
         current = self.head
         while current:
-            print(current.key, end ="->")
-            current= current.next
+            print(current.key, end = "->")
+            current = current.next
         print("None")
-    
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     q = Queue()
     q.enqueue(1)
     q.enqueue(2)
     q.enqueue(3)
-    q.printQueue()
+    q.printList()
     q.dequeue()
-    q.printQueue()
+    q.printList()
+
+
