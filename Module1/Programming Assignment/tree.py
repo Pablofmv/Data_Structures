@@ -17,7 +17,8 @@ def compute_height(n, parents):
             root = i
         else:
             children[parent].append(i)
-        
+    
+    print(children)
     print("Tree Structure")
     print_tree(root, children)
     print()
