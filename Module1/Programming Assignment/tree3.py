@@ -25,7 +25,6 @@ def compute_heights(n, parents):
     print_tree(root, children)
     print()
 
-
 def main():
     n = int(input())
     parents = list(map(int, input().split()))
