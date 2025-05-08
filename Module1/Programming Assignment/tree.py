@@ -3,7 +3,7 @@ def print_tree(node, children, level =0, prefix =""):
     print(f"{indent}{prefix}Node {node}")
 
     for child in children[node]:
-        print_tree(child, children, level +1, prefix="|--")
+        return print_tree(child, children, level +1, prefix="|--")
 
 def compute_height(n, parents):
 
