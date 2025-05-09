@@ -6,15 +6,33 @@ import threading
 
 def compute_height(n, parents):
     # Replace this code with a faster implementation
-    max_height = 0
-    for vertex in range(n):
-        height = 0
-        current = vertex
-        while current != -1:
-            height += 1
-            current = parents[current]
-        max_height = max(max_height, height)
-    return max_height
+    
+    children = [[] for i in range(0,n)]
+    root = 0
+
+    for i in range(0,n):
+        parent = parents[i]
+
+        if parent == -1:
+            root = i
+        else:
+            children[parent].append(i)
+
+    def dfs(node):
+
+        if not children[node]:
+            return 1
+        
+        tallest_height_node = 0
+
+        for child in children[node]:
+            height_node = dfs(child)
+            tallest_height_node = max(tallest_height_node, height_node)
+        
+        return tallest_height_node + 1
+    
+    return dfs(root)
+
 
 
 def main():
