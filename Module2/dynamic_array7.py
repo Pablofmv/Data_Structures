@@ -41,7 +41,7 @@ class DynamicArray:
         for j in range(i, self.size - 1):
             self.arr[j] = self.arr[ j + 1]
         
-        self.arr[i] = None
+        self.arr[self.size - 1] = None
         self.size -= 1
 
     def Size(self):
@@ -50,9 +50,11 @@ class DynamicArray:
 da = DynamicArray()
 da.PushBack(0)
 da.PushBack(1)
+da.PushBack(2)
+da.PushBack(3)
 
 print(da.arr)
 
-da.Remove(0)
+da.Remove(2)
 
 print(da.arr)
