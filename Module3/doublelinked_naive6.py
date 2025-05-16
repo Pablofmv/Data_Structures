@@ -40,6 +40,23 @@ class PriorityQueue:
         current.prev.next = new_node
         new_node.next = current
         current.prev = new_node
+    
+    def ExtractMax(self):
+
+        if self.tail is None:
+            return None
+        
+        max_value = self.tail.key
+
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+        
+        return max_value
+
 
     def PrintPriorityQueue(self):
 
@@ -57,6 +74,13 @@ pq.Insert(40)
 
 pq.PrintPriorityQueue()
 
+pq.ExtractMax()
+
+pq.PrintPriorityQueue()
+
+pq.ExtractMax()
+
+pq.PrintPriorityQueue()
 
 
 
