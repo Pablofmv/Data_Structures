@@ -26,7 +26,7 @@ class PriorityQueue:
         self.arr.append(None)
 
         for i in range(len(self.arr)-1,left, -1):
-            self.arr[i+1] = self.arr[i]
+            self.arr[i] = self.arr[i-1]
         
         self.arr[left] = e
 
