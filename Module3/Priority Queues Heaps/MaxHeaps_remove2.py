@@ -55,6 +55,16 @@ class MaxHeap:
         self.size -= 1
         self.sift_down(1)
     
+    def remove(self, i):
+
+        if i < 1 and i > self.size:
+            return "Error"
+        
+        self.H[i] = float("inf")
+        self.sift_up(i)
+        self.extract_max()
+
+    
     def print(self):
         print(self.H[1:self.size +1])
 
@@ -66,4 +76,6 @@ mh.print()
 mh.insert(50)
 mh.print()
 mh.extract_max()
+mh.print()
+mh.remove(2)
 mh.print()
