@@ -33,6 +33,16 @@ def BuildHeap(A):
     print(A)
     return size
 
+def HeapSort(orig):
+
+    A = [None] + orig[:]
+    size = BuildHeap(A)
+
+    for i in range(0, size -1):
+        A[1], A[size] = A[size], A[1]
+        size -= 1
+        sift_down(A, 1, size)
+
 if __name__ == "__main__":
     A = [7,2,5,1,9,3]
     BuildHeap(A)
