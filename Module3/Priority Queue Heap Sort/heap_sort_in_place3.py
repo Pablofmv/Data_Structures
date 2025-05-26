@@ -29,8 +29,7 @@ def BuildHeap(A):
 
     for i in range(size // 2, 0, -1):
         sift_down(A, i, size)
-    
-    print(A)
+
     return size
 
 def HeapSort(orig):
@@ -42,7 +41,9 @@ def HeapSort(orig):
         A[1], A[size] = A[size], A[1]
         size -= 1
         sift_down(A, 1, size)
+    
+    return A[1:]
 
 if __name__ == "__main__":
     A = [7,2,5,1,9,3]
-    BuildHeap(A)
+    print(HeapSort(A))
