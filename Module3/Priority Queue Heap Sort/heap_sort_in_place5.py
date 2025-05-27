@@ -1,5 +1,5 @@
 def parent(i):
-    return i // 2
+    return i //2
 
 def left_child(i):
     return i * 2
@@ -27,24 +27,28 @@ def build_heap(A):
     n = len(A)
     size = n - 1
 
-    for i in range(size // 2, 0, -1):
+    for i in range(n // 2, 0, -1):
         sift_down(A, i, size)
     
-    print(A)
-    return size
+    return A
 
-def sort_heap(A):
+def heap_sort(A):
 
-    A = [None] + A[:]
-    size = build_heap(A)
-    
+    A = [None] + A[:] 
+    n = len(A)
+    A = build_heap(A)
+    size = n - 1
+
+
     for i in range(0, size - 1):
         A[1], A[size] = A[size], A[1]
         size -= 1
-        sift_down(A, 1, size)
-    
+        sift_down(A,1,size)
+
     return A[1:]
 
+
 if __name__ == "__main__":
+
     A = [7,2,5,1,9,3]
-    print(sort_heap(A))
+    print(heap_sort(A))
