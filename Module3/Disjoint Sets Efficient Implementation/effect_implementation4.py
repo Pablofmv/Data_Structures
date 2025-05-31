@@ -26,23 +26,21 @@ class Disjointset:
             self.parent[j_dj] = i_dj
         else:
             self.parent[i_dj] = j_dj
+
             if self.rank[i_dj] == self.rank[j_dj]:
                 self.rank[j_dj] += 1
     
     def __str__(self):
-
         return " ".join(str(x) for x in self.parent[1:])
 
-ds = Disjointset(5)
+if __name__ == "__main__":
+    ds = Disjointset(5)
 
-for i in range(1,6):
-    ds.make_set(i)
+    for i in range(1,6):
+        ds.make_set(i)
+    
+    ds.union(1, 4)
+    ds.union(4, 3)
+    ds.union(3, 2)
 
-print(ds)
-
-ds.union(1,4)
-ds.union(4,3)
-ds.union(3,2)
-
-print(ds)
-
+    print(ds)
