@@ -9,21 +9,21 @@ def left_child(i):
 def right_child(i):
     return i * 2 + 1
 
-def sift_down(data, i, size, swaps):
+def sift_down(data, i, size, sort_set):
 
-    minIndex = i
+    maxIndex = i
     left = left_child(i)
-    if left <= size and data[left] < data[minIndex]:
-        minIndex = left
+    if left <= size and data[left] < data[maxIndex]:
+        maxIndex = left
     
     right = right_child(i)
-    if right <= size and data[right] < data[minIndex]:
-        minIndex = right
+    if right <= size and data[right] < data[maxIndex]:
+        maxIndex = right
     
-    if i != minIndex:
-        swaps.append((i -1,minIndex -1))
-        data[i], data[minIndex] = data[minIndex], data[i]
-        sift_down(data, minIndex, size , swaps)
+    if i != maxIndex:
+        sort_set.append((i - 1, maxIndex - 1))
+        data[i], data[maxIndex] = data[maxIndex] ,data[i]
+        sift_down(data, maxIndex, size, sort_set)
 
 
 
@@ -39,29 +39,29 @@ def build_heap(data):
     #
     # TODO: replace by a more efficient implementation
     
-    data = [None] + data[:]
+    A = [None] + data[:]
     n = len(data)
-    size = n - 1
-    swaps = []
+    size = n
+    sort_set = []
 
-    for i in range(n//2, 0, - 1):
-        sift_down(data, i, size, swaps)
-
-    print(data)
-    return swaps
+    for i in range(n//2, 0, -1):
+        sift_down(A, i, size, sort_set)
+    
+    return sort_set
 
 
 def main():
     n = int(input())
     data = list(map(int, input().split()))
     assert len(data) == n
-
     swaps = build_heap(data)
+    
+    print(swaps)
+    print(data)
 
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
-    
 
 
 if __name__ == "__main__":
