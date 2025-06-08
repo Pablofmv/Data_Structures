@@ -26,7 +26,21 @@ def build_min_heap(n):
 
     return [None] + [(0,i) for i in range(0,n)]
 
+def assign_jobs(n, jobs):
+
+    heap = build_min_heap(n)
+    size = n 
+    print(heap)
+    print(jobs)
+
+    for duration in jobs:
+        free_time, thread_index = heap[1]
+        print(thread_index, free_time)
+
+        heap[1] = (free_time + duration, thread_index)
+        sift_down(heap, 1, size)
+
 if __name__ == "__main__":
-    A = [1,2,3,4,5]
-    build_min_heap(A)
-    print(A)
+    n, m = map(int, input().split())
+    jobs = list(map(int, input().split()))
+    assign_jobs(n, jobs)
