@@ -11,28 +11,20 @@ def sift_down(A, i, size):
 
     minIndex = i
     left = left_child(i)
-    if left <= size and left < minIndex:
+    if left <= size and A[left] < A[minIndex]:
         minIndex = left
     
     right = right_child(i)
-    if right <= size and right < minIndex:
+    if right <= size and A[right] < A[minIndex]:
         minIndex = right
     
     if i != minIndex:
-        i, minIndex = minIndex, i
+        A[i], A[minIndex] = A[minIndex], A[i]
         sift_down(A, minIndex, size)
 
-def build_min_heap(A):
+def build_min_heap(n):
 
-    A = [None] + A[:]
-    n = len(A)
-    size = n - 1
-    output = []
-
-    for i in range(n // 2, -1, -1):
-        sift_down(A, i, size, output)
-    
-    return size
+    return [None] + [(0,i) for i in range(0,n)]
 
 if __name__ == "__main__":
     A = [1,2,3,4,5]
