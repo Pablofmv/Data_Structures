@@ -28,43 +28,36 @@ def sift_down(A, i, size):
         A[i], A[minIndex] = A[minIndex], A[i]
         sift_down(A, minIndex, size)
 
-
 def build_heap(n):
-    return [None] + [(0,i) for i in range(n)]
+    return [None] + [(0,x) for x in range(0,n)]
 
 def assign_jobs(n_workers, jobs):
     # TODO: replace this code with a faster algorithm.
-
-    thread_heap = build_heap(n_workers)
-
-    n = len(thread_heap)
-
-    size = n - 1
+    heap_thread = build_heap(n_workers)
+    assigned_jobs = []
 
     for duration in jobs:
-        free_time, thread_index = thread_heap[1]
+        free_time, thread_index = heap_thread[1]
 
-        print(thread_index, free_time)
-        
-        thread_heap[1] = free_time + duration, thread_index
+        assigned_jobs.append([thread_index, free_time])
+        heap_thread[1] = free_time + duration, thread_index
 
-        sift_down(thread_heap, 1, size)
+        sift_down(heap_thread, 1, n_workers)
     
+    return assigned_jobs
+
+
 
 def main():
     n_workers, n_jobs = map(int, input().split())
     jobs = list(map(int, input().split()))
     assert len(jobs) == n_jobs
 
-    assign_jobs(n_workers, jobs)
 
-    """
     assigned_jobs = assign_jobs(n_workers, jobs)
 
     for job in assigned_jobs:
-        print(job.worker, job.started_at)
-    """
-
+        print(job[0], job[1])
 
 if __name__ == "__main__":
     main()
