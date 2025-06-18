@@ -27,7 +27,7 @@ class HashSet:
 
         for k in chain:
             if k == key:
-                return
+                return None
         
         chain.append(key)
     
