@@ -18,3 +18,40 @@ class HashSet:
             return True
         
         return False
+
+    def add(self, key):
+
+        index = hash_function(key, self.m)
+        chain = self.chains[index]
+
+        if key in chain:
+            return
+        
+        chain.append(key)
+
+    def remove(self, key):
+
+        if not self.find(key):
+            return
+        
+        index = hash_function(key, self.m)
+        chain = self.chains[index]
+
+        chain.remove(key)
+
+if __name__ == "__main__":
+
+    hs = HashSet(5)
+
+    hs.add("Pablo")
+    hs.add("Sunil")
+
+    hs.add("Pablo")
+
+    print(hs.chains)
+
+    hs.remove("Pablo")
+
+    print(hs.chains)
+
+
