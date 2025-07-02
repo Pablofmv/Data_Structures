@@ -1,0 +1,50 @@
+import random
+
+class HashTableWithChains:
+
+    def __init__(self, size = 10000):
+        self.size = size
+        self.p = 10000019 #first prime number
+        self.x = random.randint(1, self.p - 1)
+        self.chains = [[] for i in range(0,self.size)]
+
+    def poly_hash(self, s):
+        hash_value = 0
+        for char in reversed(s):
+            hash_value = (hash_value * self.x + ord(char)) % self.p
+        return hash_value % self.size
+    
+    def insert(self, name, phone_number):
+        index = self.poly_hash(name)
+        chain = self.chains[index]
+        for i, (k,v) in enumerate(chain):
+            if k == name:
+                chain[i] = (name, phone_number)
+                return
+        chain.append((name, phone_number))
+    
+    def search(self, name):
+        index = self.poly_hash(name)
+        chain = self.chains[index]
+
+        for k,v in chain:
+            if k == name:
+                return v
+        
+        return None
+    
+if __name__ == "__main__":
+
+    ht = HashTableWithChains()
+
+    ht.insert("Alice", "123-4567")
+    ht.insert("Bob", "987-6543")
+    ht.insert("Charlie", "555-1234")
+
+    print(ht.search("Alice"))    # → 123-4567
+    print(ht.search("Bob"))      # → 987-6543
+    print(ht.search("Charlie"))  # → 555-1234
+
+
+
+        
