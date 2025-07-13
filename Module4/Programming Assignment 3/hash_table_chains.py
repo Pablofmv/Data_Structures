@@ -29,6 +29,7 @@ class HashTableWithChains:
         self.chains = [[] for i in range(0, self.size)]
         self.generate_hash_function()
         self.num_keys = 0
+        
         for chain in old_chain:
             for key, value in chain:
                 self.insert(key, value)
