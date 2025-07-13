@@ -11,16 +11,13 @@ class Query:
 class HashWithChains:
         
     def __init__(self, size = 4):
-        self.size = 4
+        self.size = size
         self.p = 10 ** 9 + 7
         self.num_keys = 0
         self.chains = [[] for i in range(0, self.size)]
-        self.generate_hash_function()
 
-    def generate_hash_function(self):
-        self.a = random.randint(1, self.p - 1)
-        self.b = random.randint(0, self.p - 1)
-        self.hash = lambda x : ((self.a * x + self.b) % self.p) % self.size
+    def hash(self, x):
+        return x % self.size
     
     def load_factor(self):
         return self.num_keys / self.size
@@ -35,7 +32,6 @@ class HashWithChains:
         old_chain = self.chains
         self.size *= 2
         self.chains = [[] for i in range(0, self.size)]
-        self.generate_hash_function()
         self.num_keys = 0
 
         for chain in old_chain:
@@ -78,8 +74,6 @@ class HashWithChains:
                 del chain[i]
                 self.num_keys -= 1
                 return
-        
-        return
 
 def read_queries():
     n = int(input())
@@ -93,16 +87,17 @@ def write_responses(result):
 def process_queries(queries):
     result = []
     # Keep list of all existing (i.e. not deleted yet) contacts.
-    contacts = HashWithChains()
+    contacts = [None] * 10000000
     for cur_query in queries:
         if cur_query.type == 'add':
             # if we already have contact with such number,
             # we should rewrite contact's name
-            contacts.insert(cur_query.number, cur_query.name)
+            contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
-            contacts.delete(cur_query.number)
+            contacts[cur_query.number] = None
         else:
-            result.append(contacts.search(cur_query.number))
+            name = contacts[cur_query.number]
+            result.append(name if name is not None else "not found")
     return result
 
 if __name__ == '__main__':
