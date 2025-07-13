@@ -2,17 +2,18 @@ import random
 
 class HashTableWithChains:
 
-    def __init__(self, size = 3):
+    def __init__(self, size = 2):
         self.size = size
-        self.chains = [[] for i in range(0, size)]
-        self.p = 10 ** 7 + 19
-        self.num_keys  = 0
+        self.chains = [[] for i in range(0,size)]
+        self.num_keys = 0
+        self.p = 10 ** 9 + 17
         self.generate_hash_function()
 
     def generate_hash_function(self):
+
         self.a = random.randint(1, self.p - 1)
         self.b = random.randint(0, self.p - 1)
-        self.hash = lambda x : ((x * self.a + self.b) % self.p) % self.size
+        self.hash = lambda x : ((self.a * x + self.b)% self.p) % self.size
     
     def load_factor(self):
         return self.num_keys / self.size
@@ -20,30 +21,31 @@ class HashTableWithChains:
     def rehash(self):
 
         if self.load_factor() <= 0.9:
-            return
+            return 
         
-        print("Rehashing...")
+        print("Rehashing ...")
 
-        old_chain = self.chains
+        old_chains = self.chains
         self.size *= 2
-        self.chains = [[] for i in range(0, self.size)]
         self.generate_hash_function()
+        self.chains = [[] for i in range(0, self.size)]
         self.num_keys = 0
-        for chain in old_chain:
+
+        for chain in old_chains:
             for key, value in chain:
                 self.insert(key, value)
-        
+    
     def insert(self, key, value):
 
         index = self.hash(key)
         chain = self.chains[index]
 
         for i, (k,v) in enumerate(chain):
-            if key == k:
+            if k == key:
                 chain[i] = (key, value)
                 return
         
-        chain.append((key, value))
+        chain.append((key,value))
         self.num_keys += 1
         self.rehash()
     
@@ -53,24 +55,24 @@ class HashTableWithChains:
         chain = self.chains[index]
 
         for k, v in chain:
-            if key == k:
+            if k == key:
                 return v
         
         return None
-
+    
     def delete(self, key):
 
         index = self.hash(key)
         chain = self.chains[index]
 
         for i, (k, v) in enumerate(chain):
-
-            if key == k:
+            if k == key:
                 del chain[i]
                 self.num_keys -= 1
                 return True
+        
         return False
-    
+
 if __name__ == "__main__":
 
     ht = HashTableWithChains()
@@ -88,3 +90,9 @@ if __name__ == "__main__":
     ht.delete(2031122)
 
     print(ht.chains)
+
+    ht.insert(9999998, "Pablo")
+
+                
+
+    
