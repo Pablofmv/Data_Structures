@@ -58,6 +58,7 @@ connect(n4, n1, True)
 connect(n4, n6, False)
 connect(n13, n10, True)
 connect(n13, n15, False)
+c
 
 target = find(6, root)
 print(target.key)
