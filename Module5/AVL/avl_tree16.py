@@ -77,3 +77,88 @@ def insert(root, key):
         root.right.parent = root
     
     return rebalance(root)
+
+def inorder(n):
+    if n:
+        inorder(n.left)
+        print(f"{n.key}(h={n.height})", end = " ")
+        inorder(n.right)
+
+def find_max(n):
+    while n.right:
+        n = n.right
+    return n
+
+def delete(root, key):
+
+    if not root:
+        return None
+    if key < root.key:
+        root.left = delete(root.left, key)
+    elif key > root.key:
+        root.right = delete(root.right, key)
+    else:
+        if not root.left:
+            return root.right
+        elif not root.right:
+            return root.left
+        temp = find_max(root.left)
+        root.key = temp.key
+        root.left = delete(root.left, temp.key)
+    return rebalance(root)
+
+def merge_with_root(R1, R2, T):
+    T.left = R1
+    if R1:
+        R1.parent = T
+    T.right = R2
+    if R2:
+        R2.parent = T
+    update_height(T)
+    return rebalance(T)
+
+def merge(R1, R2):
+    if not R1:
+        return R2
+    if not R2:
+        return R1
+    T = find_max(R1)
+    R1 = delete(R1, T.key)
+    return merge_with_root(R1, R2, T)
+
+def split(R, x):
+    if not R:
+        return (None, None)
+    if x < R.key:
+        L, R1 = split(R.left, x)
+        new_right = merge_with_root(R1, R.right, R)
+        return (L, new_right)
+    else:
+        L1, R2 = split(R.right, x)
+        new_left = merge_with_root(R.left, L1, R)
+        return (new_left, R2)
+    
+root = None
+for k in [10, 20, 30, 40, 50, 25]:
+    root = insert(root, k)
+
+# Inorder print
+print("Inorder traversal (sorted):")
+inorder(root)
+
+# Split at 30
+print("\n\nSplit at 30:")
+L, R = split(root, 30)
+print("Left (<30):")
+inorder(L)
+print("\nRight (>30):")
+inorder(R)
+
+# Merge back
+print("\n\nMerge back:")
+root = merge(L, R)
+inorder(root)
+
+
+
+
