@@ -101,5 +101,15 @@ def kth_smallest(R, k):
     else:
         return kth_smallest(R.right, k - s + 1)
     
+def rank(R, key):
 
+    r = 1
+    cur = R
+    while cur:
+        if key <= cur.key:
+            cur = cur.left
+        else:
+            r += size(cur.left) + 1
+            cur = cur.right
+    return r
 
