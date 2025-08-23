@@ -92,6 +92,7 @@ def inorder(n):
 def kth_smallest(R, k):
     if not R or k < 1 or k > size(R):
         raise IndexError("k out of range")
+    
     s = size(R.left)
 
     if k == s + 1:
@@ -111,5 +112,13 @@ def rank(R, key):
         else:
             r += size(cur.left) + 1
             cur = cur.right
-    return r
+    return R
+
+def median(R):
+    n = size(R)
+    if n == 0:
+        raise IndexError("Empty Tree")
+    return kth_smallest(R, (n+1)//2)
+
+
 
