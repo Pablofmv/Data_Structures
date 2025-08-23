@@ -22,8 +22,9 @@ def get_balance(n):
     return height(n.left) - height(n.right)
 
 def rotate_left(x):
+
     y = x.right
-    x .right = y.left
+    x.right = y.left
 
     if y.left:
         y.left.parent = x
@@ -34,12 +35,14 @@ def rotate_left(x):
 
     update_height(x)
     update_height(y)
+
     return y
 
 def rotate_right(y):
+
     x = y.left
     y.left = x.right
-    
+
     if x.right:
         x.right.parent = y
     x.right = y
@@ -49,8 +52,8 @@ def rotate_right(y):
 
     update_height(y)
     update_height(x)
-    return x
 
+    return x
 
 def rebalance(n):
     update_height(n)
@@ -69,6 +72,7 @@ def rebalance(n):
     return n
 
 def insert(root, key):
+
     if not root:
         return Node(key)
     
@@ -86,10 +90,11 @@ def insert(root, key):
 def inorder(n):
     if n:
         inorder(n.left)
-        print(f"{n.key}(h={n.height},s={n.size})", end = " ")
+        print(f"{n.key}(h={n.height},s={n.size})",end = " ")
         inorder(n.right)
 
 def kth_smallest(R, k):
+
     if not R or k < 1 or k > size(R):
         raise IndexError("k out of range")
     
@@ -100,10 +105,9 @@ def kth_smallest(R, k):
     elif k <= s:
         return kth_smallest(R.left, k)
     else:
-        return kth_smallest(R.right, k - s + 1)
+        return kth_smallest(R.right, k - s - 1)
     
 def rank(R, key):
-    
     r = 1
     cur = R
     while cur:
@@ -111,14 +115,12 @@ def rank(R, key):
             cur = cur.left
         else:
             r += size(cur.left) + 1
-            cur = cur.right
-    return R
 
-def median(R):
-    n = size(R)
-    if n == 0:
-        raise IndexError("Empty Tree")
-    return kth_smallest(R, (n+1)//2)
+
+    
+    
+    
+
 
 
 
