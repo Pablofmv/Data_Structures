@@ -115,6 +115,15 @@ def rank(R, key):
             cur = cur.left
         else:
             r += size(cur.left) + 1
+            cur = cur.right
+    return R
+
+def median(R):
+    n = size(R)
+    if n == 0:
+        raise IndexError("Empy Tree")
+    return kth_smallest(R, (n+1)// 2)
+
 
 
     
