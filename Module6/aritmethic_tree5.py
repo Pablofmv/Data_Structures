@@ -70,4 +70,59 @@ def rebalance(n):
         return rotate_left(n)
     
     return n
+
+def insert(root, key):
+
+    if not root:
+        return Node(key)
+    
+    if key < root.key:
+        root.left = insert(root.left, key)
+        root.left.parent = root
+    elif key > root.key:
+        root.right = insert(root.right, key)
+        root.right.parent = root
+    else:
+        return root
+    
+    return rebalance(root)
+
+def inorder(n):
+
+    if n:
+        inorder(n.left)
+        print(f"{n.key}(h={n.height}, s={n.size})", end = " ")
+        inorder(n.right)
+
+def kth_smallest(R, k):
+
+    if not R or k < 1 or k > size(R):
+        return IndexError("k out of range")
+    
+    s = size(R.left)
+    if s + 1 == k:
+        return R.key
+    elif k <= s:
+        return kth_smallest(R.left, k)
+    else:
+        return kth_smallest(R.right, k - s -1)
+    
+def rank(R, k):
+
+    r = 1
+    cur = R
+    while cur:
+        if k <= cur.key:
+            cur = cur.left
+        else:
+            r += size(cur.left) + 1
+            cur = cur.right
+    
+    return r
+
+root = None
+for x in [5,3,8,2,4,7,9]: root = insert(root, x)
+print(kth_smallest(root, 4))  # expected 5  (sorted: [2,3,4,5,7,8,9])
+print(rank(root, 7))          # expected 5  (position of 7 in sorted order)
+
     
