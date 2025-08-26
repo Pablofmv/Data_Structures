@@ -122,7 +122,7 @@ def rank(R, k):
 
 root = None
 for x in [5,3,8,2,4,7,9]: root = insert(root, x)
-print(kth_smallest(root, 4))  # expected 5  (sorted: [2,3,4,5,7,8,9])
-print(rank(root, 7))          # expected 5  (position of 7 in sorted order)
+print(kth_smallest(root, 4))  
+print(rank(root, 7))        
 
     
