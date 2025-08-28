@@ -70,3 +70,43 @@ def rebalance(n):
     
     return n
 
+def insert(root, key):
+
+    if not root:
+        return Node(key)
+    
+    if key < root.key:
+        root.left = insert(root.left, key)
+        root.left.parent = root
+    elif key > root.key:
+        root.right = insert(root.right, key)
+        root.right.parent = root
+    else:
+        return root
+    
+    return rebalance(root)
+
+def inorder(n):
+
+    if n:
+        inorder(n.left)
+        print(f"{n.key}(h={n.height},s={n.size})", end = " ")
+        inorder(n.right)
+
+def kth_smallest(R, k):
+
+    if not R or k  < 1 or k < size(R):
+        return IndexError("k out of range")
+    
+    s = 1 + size(R.left)
+    if k == s + 1:
+        return R.key
+    elif k <= s:
+        return kth_smallest(R.left, k)
+    else:
+        return kth_smallest(R.right, k - s - 1)
+    
+
+
+
+
