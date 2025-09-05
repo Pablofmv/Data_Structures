@@ -19,7 +19,7 @@ def IsBinarySearchTree(tree):
   cur = 0
   prev = None
 
-  while cur != -1 and stack:
+  while cur != -1 or stack:
     while cur != -1:
       stack.append(cur)
       cur = left[cur]
