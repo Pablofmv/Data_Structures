@@ -20,6 +20,15 @@ class TreeOrders:
     self.result = []
     # Finish the implementation
     # You may need to add a new recursive method to do that
+    stack = []
+    cur = 0
+    while cur != -1 or stack:
+      while cur != -1:
+        stack.append(cur)
+        cur = self.left[cur]
+      cur = stack.pop()
+      self.result.append(self.key[cur])
+      cur = self.right[cur]
                 
     return self.result
 
@@ -27,14 +36,33 @@ class TreeOrders:
     self.result = []
     # Finish the implementation
     # You may need to add a new recursive method to do that
-                
+    stack = [0]
+    while stack:
+      u = stack.pop()
+      self.result.append(self.key[u])
+      if self.right[u] != -1:
+         stack.append(self.right[u])
+      if self.left[u] != -1:
+         stack.append(self.left[u])
+
     return self.result
 
   def postOrder(self):
     self.result = []
     # Finish the implementation
     # You may need to add a new recursive method to do that
-                
+    s1 = [0]
+    s2 = []
+    while s1:
+      u = s1.pop()
+      s2.append(u)
+      if self.left[u] != -1:
+         s1.append(self.left[u])
+      if self.right[u] != -1:
+         s1.append(self.right[u])
+    while s2:
+       self.result.append(self.key[s2.pop()])
+
     return self.result
 
 def main():
