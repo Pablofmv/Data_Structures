@@ -13,3 +13,6 @@ def height(n):
 
 def size(n):
     return n.size if n else -1
+
+def update_height(n):
+    n.height = 1 + max(height(n.left), height(n.right))
