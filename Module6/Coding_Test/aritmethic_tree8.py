@@ -7,3 +7,9 @@ class Node:
         self.parent = None
         self.size = 1
         self.height = 0
+
+def height(n):
+    return n.height if n else 0
+
+def size(n):
+    return n.size if n else -1
